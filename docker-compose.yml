@@ -13,6 +13,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./data/:/etc/data
   nginx:
+    depends_on:
+      - nginx_app
     image: nginx:1.17.8-alpine
     command: "sh /etc/reload/reload.sh"
     ports:
@@ -23,6 +25,8 @@ services:
       - ./data/nginx/reload:/etc/reload
     restart: unless-stopped
   nginx_app:
+    depends_on:
+      - app
     image: nginx:1.17.8-alpine
     command: "sh /etc/reload/reload.sh"
     container_name: "cache_model_nginx_app"
