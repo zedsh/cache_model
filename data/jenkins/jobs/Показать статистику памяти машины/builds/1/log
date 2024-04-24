@@ -1,0 +1,9 @@
+Started by user [8mha:////4GSiwUTaqfB0GCcHC40swkZO4p1WzBnIZXF61MBaWJRQAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/Показать статистику памяти
+[Показать статистику памяти] $ /bin/sh -xe /tmp/jenkins12399462761639257440.sh
++ free -h
+               total        used        free      shared  buff/cache   available
+Mem:           7.7Gi       4.5Gi       262Mi        19Mi       3.1Gi       3.2Gi
+Swap:          1.0Gi          0B       1.0Gi
+Finished: SUCCESS

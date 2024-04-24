@@ -1,0 +1,12 @@
+Started at Wed Apr 24 12:43:17 UTC 2024
+Processing Кэш на уровне nginx
+Offering Кэш на уровне nginx to Project Build Discarder
+Processing Кэш на уровне приложения
+Offering Кэш на уровне приложения to Project Build Discarder
+Processing Никакого кэша нет
+Offering Никакого кэша нет to Project Build Discarder
+Processing Показать примеры запросов dns
+Offering Показать примеры запросов dns to Project Build Discarder
+Processing Показать статистику памяти машины
+Offering Показать статистику памяти машины to Project Build Discarder
+Finished at Wed Apr 24 12:43:17 UTC 2024. 51ms

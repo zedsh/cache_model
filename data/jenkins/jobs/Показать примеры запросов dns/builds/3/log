@@ -1,0 +1,60 @@
+Started by user [8mha:////4GSiwUTaqfB0GCcHC40swkZO4p1WzBnIZXF61MBaWJRQAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/Показать примеры запросов dns
+[Показать примеры запросов dns] $ /bin/sh -xe /tmp/jenkins7097019523775506220.sh
++ nslookup ya.ru
+Server:		127.0.0.11
+Address:	127.0.0.11#53
+
+Non-authoritative answer:
+Name:	ya.ru
+Address: 77.88.55.242
+Name:	ya.ru
+Address: 5.255.255.242
+Name:	ya.ru
+Address: 2a02:6b8::2:242
+
++ dig ya.ru
+
+; <<>> DiG 9.18.24-1-Debian <<>> ya.ru
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 4073
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 0
+
+;; QUESTION SECTION:
+;ya.ru.				IN	A
+
+;; ANSWER SECTION:
+ya.ru.			389	IN	A	77.88.55.242
+ya.ru.			389	IN	A	5.255.255.242
+
+;; Query time: 7 msec
+;; SERVER: 127.0.0.11#53(127.0.0.11) (UDP)
+;; WHEN: Wed Apr 24 12:28:10 UTC 2024
+;; MSG SIZE  rcvd: 55
+
++ dig @8.8.8.8 ya.ru
+
+; <<>> DiG 9.18.24-1-Debian <<>> @8.8.8.8 ya.ru
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 47280
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;ya.ru.				IN	A
+
+;; ANSWER SECTION:
+ya.ru.			60	IN	A	5.255.255.242
+ya.ru.			60	IN	A	77.88.55.242
+
+;; Query time: 49 msec
+;; SERVER: 8.8.8.8#53(8.8.8.8) (UDP)
+;; WHEN: Wed Apr 24 12:28:10 UTC 2024
+;; MSG SIZE  rcvd: 66
+
+Finished: SUCCESS

@@ -1,0 +1,8 @@
+Started by user [8mha:////4GSiwUTaqfB0GCcHC40swkZO4p1WzBnIZXF61MBaWJRQAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/Показать примеры запросов dns
+[Показать примеры запросов dns] $ /bin/sh -xe /tmp/jenkins3872595895776871653.sh
++ dig ya.ru
+/tmp/jenkins3872595895776871653.sh: 2: dig: not found
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

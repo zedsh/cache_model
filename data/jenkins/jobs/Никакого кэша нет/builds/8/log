@@ -1,0 +1,8 @@
+Started by user [8mha:////4GSiwUTaqfB0GCcHC40swkZO4p1WzBnIZXF61MBaWJRQAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/Никакого кэша нет
+[Никакого кэша нет] $ /bin/sh -xe /tmp/jenkins2320031342338470572.sh
++ cat /etc/data/nginx/prepared_conf/full_no_cache.conf
+/tmp/jenkins2320031342338470572.sh: 3: cannot create /etc/reload/need_reload: Directory nonexistent
+Build step 'Execute shell' marked build as failure
+Finished: FAILURE

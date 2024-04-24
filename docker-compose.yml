@@ -1,0 +1,143 @@
+version: "3"
+services:
+  jenkins:
+    build: ./data/jenkins_docker
+    container_name: "cache_model_jenkins"
+    privileged: true
+    user: root
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - ./data/jenkins:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data/:/etc/data
+  nginx:
+    image: nginx:1.17.8-alpine
+    command: "sh /etc/reload/reload.sh"
+    ports:
+        - "80:80"
+    container_name: "cache_model_nginx"
+    volumes:
+      - ./data/nginx/conf:/etc/nginx/conf.d
+      - ./data/nginx/reload:/etc/reload
+    restart: unless-stopped
+  nginx_app:
+    image: nginx:1.17.8-alpine
+    command: "sh /etc/reload/reload.sh"
+    container_name: "cache_model_nginx_app"
+    volumes:
+      - ./data/nginx_app/conf:/etc/nginx/conf.d
+      - ./data/nginx_app/reload:/etc/reload
+    restart: unless-stopped
+  grafana:
+    image: grafana/grafana:latest
+    container_name: "cache_model_grafana"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data/grafana:/var/lib/grafana
+
+  nginx-prometheus-exporter:
+    container_name: "cache_model_nginx_exporter"
+    image: nginx/nginx-prometheus-exporter:1.0
+    restart: always
+    command:
+      - -nginx.scrape-uri=http://nginx/stub_status
+    expose:
+      - 9113
+    depends_on:
+      - prometheus
+
+  postgres-prometheus-exporter:
+    container_name: "cache_model_postgres_prometheus_exporter"
+    image: quay.io/prometheuscommunity/postgres-exporter
+    restart: always
+    environment:
+      DATA_SOURCE_NAME: postgresql://user:password@pgsql:5432/defaultdb?sslmode=disable
+    depends_on:
+      - prometheus
+
+
+  nginx-app-prometheus-exporter:
+    container_name: "cache_model_nginx_app_exporter"
+    image: nginx/nginx-prometheus-exporter:1.0
+    restart: always
+    command:
+      - -nginx.scrape-uri=http://nginx_app/stub_status
+    depends_on:
+      - prometheus
+
+
+  prometheus-node-exporter:
+    image: prom/node-exporter:v1.7.0
+    container_name: "cache_model_node_exporter"
+    restart: always
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - --collector.filesystem.ignored-mount-points
+      - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
+    privileged: true
+    depends_on:
+      - prometheus
+    expose:
+      - 9100
+
+  prometheus:
+    container_name: "cache_model_prometheus"
+    image: prom/prometheus:v2.45.2
+    volumes:
+      - ./data/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./data/prometheus/data:/prometheus
+    restart: always
+
+  
+  k6:
+    container_name: "cache_model_k6"
+    image: loadimpact/k6
+    command: "run /k6/test.js --address 0.0.0.0:6565"
+    volumes:
+      - ./data/k6:/k6
+
+    environment:
+      TEST_TARGET: http://nginx
+      RAMP_TIME: 20s
+      RUN_TIME: 10m
+      USER_COUNT: 10
+    restart: always
+  
+  k6-exporter:
+    container_name: "cache_model_k6_exporter"
+    image: ghcr.io/benc-uk/k6-prometheus-exporter:latest
+    restart: always
+    environment:
+      K6_API_ENDPOINT: http://k6:6565/v1
+
+  app:
+    container_name: "cache_model_app"
+    ports:
+        - "8000:8000"
+    build: ./data/app
+    restart: always
+    env_file:
+      - .env
+
+  pgsql:
+    container_name: "cache_model_pgsql"
+    image: postgres:alpine3.14
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=defaultdb
+    volumes:
+      - ./data/pgsql:/var/lib/postgresql/data
+
+  redis:
+    container_name: "cache_model_redis"
+    image: redis:latest
+    restart: always
