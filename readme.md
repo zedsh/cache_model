@@ -6,3 +6,8 @@ admin / admin
 
 App
 http://localhost/payload
+
+
+chmod 777 data/prometheus/data
+chmod 777 data/grafana
+
